@@ -1,8 +1,336 @@
-<!DOCTYPE html>
-<html>
-<head><title>Maahir Shop</title></head>
-<body>
-<h1>Welcome to Maahir Shop</h1>
-<p>{{ info.name }}</p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Maahir Shop | Home{% endblock %}
+
+{% block content %}
+<!-- ===== HERO ===== -->
+<section class="hero mesh-gradient">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:60px;flex-wrap:wrap;">
+        <div class="hero-content fade-in">
+            <div class="hero-tag modern-glow">🚀 #1 Global Elite Platform</div>
+            <h1>Discover the <span>Future</span> of Global Marketplace</h1>
+            <p>Maahir Shop connects you to the world's most premium electronics, elite digital courses, and innovative tech insights. Trusted by 25,000+ users across 150 countries.</p>
+            <div class="hero-buttons">
+                <a href="/shop" class="btn btn-primary btn-lg">Elite Marketplace →</a>
+                <a href="/courses" class="btn btn-glass btn-lg">Maahir Academy</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat"><h3>50K+</h3><p>Global Items</p></div>
+                <div class="hero-stat"><h3>120+</h3><p>Elite Courses</p></div>
+                <div class="hero-stat"><h3>25K+</h3><p>Active Users</p></div>
+            </div>
+        </div>
+        <div class="hero-image floating hide-mobile">
+            <div class="glass modern-glow" style="padding: 10px; border-radius: 30px; border: 2px solid var(--primary);">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800" alt="Future Tech" style="border-radius: 20px; filter: contrast(1.1);">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title fade-in">Featured <span>Products</span></h2>
+        <p class="section-subtitle fade-in">Alaabta ugu caansan ee macaamiisheena ay jeclaadeen</p>
+        <div class="card-grid">
+            <div class="product-card fade-in">
+                <div class="card-img">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a2e,#16213e);display:flex;align-items:center;justify-content:center;font-size:3rem;">💻</div>
+                    <span class="card-badge">New</span>
+                </div>
+                <div class="card-body">
+                    <p class="category">Electronics</p>
+                    <h3>MacBook Pro M3 Max</h3>
+                    <p class="description">Laptop-ka ugu xoogga badan ee suuqa, loogu talagalay shaqada iyo design-ka.</p>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">$2,499 <span class="old-price">$2,999</span></div>
+                    <button class="btn-add" onclick="addToCart('MacBook Pro M3 Max', '2499', 'https://images.unsplash.com/photo-1517336714460-d13511096667?q=80&w=200')" title="Add to Cart">+</button>
+                </div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="card-img">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#0f3460,#16213e);display:flex;align-items:center;justify-content:center;font-size:3rem;">📱</div>
+                    <span class="card-badge">Hot</span>
+                </div>
+                <div class="card-body">
+                    <p class="category">Electronics</p>
+                    <h3>iPhone 16 Pro Max</h3>
+                    <p class="description">Taleefanka ugu casriga badan ee Apple, kamarad xoog leh.</p>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">$1,199</div>
+                    <button class="btn-add" onclick="addToCart('iPhone 16 Pro Max', '1199', 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=200')" title="Add to Cart">+</button>
+                </div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="card-img">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a2e,#533483);display:flex;align-items:center;justify-content:center;font-size:3rem;">🎧</div>
+                    <span class="card-badge">-30%</span>
+                </div>
+                <div class="card-body">
+                    <p class="category">Audio</p>
+                    <h3>Sony WH-1000XM5</h3>
+                    <p class="description">Headphones-ka ugu fiican codka iyo noise-canceling.</p>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">$279 <span class="old-price">$399</span></div>
+                    <button class="btn-add" onclick="addToCart('Sony WH-1000XM5', '279', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=200')" title="Add to Cart">+</button>
+                </div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="card-img">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#2d3436,#636e72);display:flex;align-items:center;justify-content:center;font-size:3rem;">⌚</div>
+                </div>
+                <div class="card-body">
+                    <p class="category">Wearables</p>
+                    <h3>Apple Watch Ultra 2</h3>
+                    <p class="description">Saacadda ugu casriga badan ee caafimaadka iyo jimicsiga.</p>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">$799</div>
+                    <button class="btn-add" onclick="addToCart('Apple Watch Ultra 2', '799', 'https://images.unsplash.com/photo-1546868871-70ca48370731?q=80&w=200')" title="Add to Cart">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== POPULAR CATEGORIES ===== -->
+<section class="section" style="padding-top:0;">
+    <div class="container">
+        <h2 class="section-title fade-in">Popular <span>Categories</span></h2>
+        <p class="section-subtitle fade-in">Raadi qaybta aad rabto</p>
+        <div class="category-grid fade-in">
+            <a href="/shop" class="category-card">
+                <div class="icon">💻</div>
+                <h4>Electronics</h4>
+                <p>230+ Products</p>
+            </a>
+            <a href="/shop" class="category-card">
+                <div class="icon">👕</div>
+                <h4>Fashion</h4>
+                <p>450+ Products</p>
+            </a>
+            <a href="/shop" class="category-card">
+                <div class="icon">📚</div>
+                <h4>Books</h4>
+                <p>180+ Products</p>
+            </a>
+            <a href="/shop" class="category-card">
+                <div class="icon">🎮</div>
+                <h4>Gaming</h4>
+                <p>120+ Products</p>
+            </a>
+            <a href="/shop" class="category-card">
+                <div class="icon">🏠</div>
+                <h4>Home & Living</h4>
+                <p>300+ Products</p>
+            </a>
+            <a href="/shop" class="category-card">
+                <div class="icon">💪</div>
+                <h4>Sports</h4>
+                <p>90+ Products</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURED COURSES ===== -->
+<section class="section" style="background:rgba(0,229,168,0.02);">
+    <div class="container">
+        <h2 class="section-title fade-in">Featured <span>Courses</span></h2>
+        <p class="section-subtitle fade-in">Koorsooyinka ugu caansan ee platform-keena</p>
+        <div class="card-grid">
+            <a href="/course/1" class="course-card fade-in">
+                <div class="card-img">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:3rem;">🐍</div>
+                    <span class="card-badge">Bestseller</span>
+                </div>
+                <div class="card-body">
+                    <p class="category">Programming</p>
+                    <h3>Python Masterclass 2026</h3>
+                    <p class="description">Baro Python laga bilaabo bilowga ilaa heerka sare. 40+ saacadood oo video ah.</p>
+                    <div class="rating">★★★★★ <span>(4.9 · 2.3K)</span></div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">$49.99</div>
+                    <span class="btn btn-primary btn-sm" onclick="addToCart('Python Masterclass 2026', '49.99', 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=200')">Enroll</span>
+                </div>
+            </a>
+            <a href="/course/2" class="course-card fade-in">
+                <div class="card-img">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#f093fb,#f5576c);display:flex;align-items:center;justify-content:center;font-size:3rem;">🎨</div>
+                </div>
+                <div class="card-body">
+                    <p class="category">Design</p>
+                    <h3>UI/UX Design Pro</h3>
+                    <p class="description">Baro design-ka casriga ah ee apps iyo websites.</p>
+                    <div class="rating">★★★★☆ <span>(4.7 · 1.8K)</span></div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">$39.99</div>
+                    <span class="btn btn-primary btn-sm" onclick="addToCart('UI/UX Design Pro', '39.99', 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=200')">Enroll</span>
+                </div>
+            </a>
+            <a href="/course/3" class="course-card fade-in">
+                <div class="card-img">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#4facfe,#00f2fe);display:flex;align-items:center;justify-content:center;font-size:3rem;">📊</div>
+                </div>
+                <div class="card-body">
+                    <p class="category">Business</p>
+                    <h3>Digital Marketing Mastery</h3>
+                    <p class="description">Baro suuq-geynta casriga ah iyo SEO, Social Media, iyo Ads.</p>
+                    <div class="rating">★★★★★ <span>(4.8 · 3.1K)</span></div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">$59.99</div>
+                    <span class="btn btn-primary btn-sm" onclick="addToCart('Digital Marketing Mastery', '59.99', 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=200')">Enroll</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== LATEST NEWS ===== -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title fade-in">Latest <span>News</span></h2>
+        <p class="section-subtitle fade-in">Wararka iyo maqaalada ugu dambeeyay</p>
+        <div class="blog-grid">
+            <a href="/news" class="blog-card fade-in">
+                <div class="card-img">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#0a192f,#112240);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🤖</div>
+                </div>
+                <div class="card-body">
+                    <div class="meta"><span>Mar 5, 2026</span><span>AI & Tech</span></div>
+                    <h3>AI's Impact on E-Commerce in 2026</h3>
+                    <p>Sida AI uu u beddelayo ganacsiga online-ka iyo waxa suuqa ka socda sanadkan.</p>
+                </div>
+            </a>
+            <a href="/news" class="blog-card fade-in">
+                <div class="card-img">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a2e,#e94560);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">📈</div>
+                </div>
+                <div class="card-body">
+                    <div class="meta"><span>Mar 3, 2026</span><span>Business</span></div>
+                    <h3>Top 10 Online Business Trends</h3>
+                    <p>Aqri 10-ka trend ee ugu muhiimsan ee ganacsiga internet-ka sanadkan.</p>
+                </div>
+            </a>
+            <a href="/news" class="blog-card fade-in">
+                <div class="card-img">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#0f3460,#533483);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🎓</div>
+                </div>
+                <div class="card-body">
+                    <div class="meta"><span>Feb 28, 2026</span><span>Education</span></div>
+                    <h3>The Rise of Online Learning</h3>
+                    <p>Sida waxbarashada online-ku u kobceyso adduunka oo dhan.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title fade-in">Customer <span>Reviews</span></h2>
+        <p class="section-subtitle fade-in">Waxaa yiri macaamiisheena</p>
+        <div class="testimonial-grid">
+            <div class="testimonial-card fade-in">
+                <div class="stars">★★★★★</div>
+                <p>"Maahir Shop waa goobta ugu fiican ee aan wax ka iibsaday. Alaabta tayo wanaagsan ayay leedahay, qiimuhuna way macquul yihiin."</p>
+                <div class="author">
+                    <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#00E5A8,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#0a0e17;font-weight:700;">A</div>
+                    <div>
+                        <h5>Axmed Maxamed</h5>
+                        <span>Software Developer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <div class="stars">★★★★★</div>
+                <p>"Koorsooyinka waxaa la baraa si fudud oo macaan. Python course-ka ayaan qaatay, waana iga caawiyay inaan shaqo helo!"</p>
+                <div class="author">
+                    <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#f093fb,#f5576c);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#0a0e17;font-weight:700;">F</div>
+                    <div>
+                        <h5>Fadumo Cali</h5>
+                        <span>Marketing Manager</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-in">
+                <div class="stars">★★★★☆</div>
+                <p>"Delivery-ga waa degdeg, support-kuna aad ayay u wanaagsan yihiin. Waxaan ku talinayaa dhammaan saaxiibbadayda!"</p>
+                <div class="author">
+                    <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#0a0e17;font-weight:700;">M</div>
+                    <div>
+                        <h5>Maxamed Yuusuf</h5>
+                        <span>Business Owner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TRENDING INSIGHTS (New Discovery System) ===== -->
+<section class="section" style="background: rgba(0,229,168,0.02); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px;">
+            <div>
+                <h2 class="section-title" style="text-align: left; margin-bottom: 0;">Global <span>Insights</span></h2>
+                <p style="color: var(--text-muted); margin-top: 10px;">The latest trends in tech and global commerce.</p>
+            </div>
+            <a href="/news" class="btn btn-glass">View All Insights</a>
+        </div>
+        <div class="card-grid">
+            <article class="product-card card-glass reveal">
+                <div class="card-img" style="height: 200px;">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=500" alt="News">
+                </div>
+                <div class="card-body">
+                    <p class="category">Technology</p>
+                    <h3>The Future of AI-Driven Global Commerce</h3>
+                    <a href="/news/ai-commerce" style="color: var(--primary); font-weight: 700; text-decoration: none; margin-top: 15px; display: inline-block;">Explore Now →</a>
+                </div>
+            </article>
+            <article class="product-card card-glass reveal" style="animation-delay: 0.1s;">
+                <div class="card-img" style="height: 200px;">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=500" alt="News">
+                </div>
+                <div class="card-body">
+                    <p class="category">Innovation</p>
+                    <h3>Revolutionizing Quantum Logistics</h3>
+                    <a href="/news/quantum-logistics" style="color: var(--primary); font-weight: 700; text-decoration: none; margin-top: 15px; display: inline-block;">Explore Now →</a>
+                </div>
+            </article>
+            <article class="product-card card-glass reveal" style="animation-delay: 0.2s;">
+                <div class="card-img" style="height: 200px;">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=500" alt="News">
+                </div>
+                <div class="card-body">
+                    <p class="category">Business</p>
+                    <h3>Global Scaling: Maahir & Amazon</h3>
+                    <a href="/news/amazon-partnership" style="color: var(--primary); font-weight: 700; text-decoration: none; margin-top: 15px; display: inline-block;">Explore Now →</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section class="section" style="padding-top:0;">
+    <div class="container">
+        <div class="newsletter fade-in">
+            <h2>Stay <span style="color:var(--primary);">Updated</span></h2>
+            <p>Ku biir liiska wargelinta si aad u hesho offers-ka cusub iyo wararka ugu dambeeyay.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Email-kaaga geli halkan..." required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

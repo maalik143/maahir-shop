@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Maahir Shop | Global Marketplace{% endblock %}</title>
+    <meta name="description" content="{% block meta_desc %}Maahir Shop - Your global destination for Premium Electronics, Fashion, Courses, and more. Global reach, local trust.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}ecommerce, global shop, tech courses, gadgets, fashion, Maahir Shop{% endblock %}">
+    
+    <!-- SEO & Social Meta -->
+    <meta property="og:site_name" content="Maahir Shop">
+    <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
+    <meta property="og:description" content="{% block og_desc %}{{ self.meta_desc() }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{{ request.url }}">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block tw_title %}{{ self.og_title() }}{% endblock %}">
+    <meta name="twitter:description" content="{% block tw_desc %}{{ self.og_desc() }}{% endblock %}">
+    <meta name="twitter:image" content="{% block tw_image %}{{ self.og_image() }}{% endblock %}">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Maahir Shop",
+      "email": "{{ info.email }}",
+      "telephone": "{{ info.phone }}",
+      "url": "http://127.0.0.1:5000"
+    }
+    </script>
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
+    
+    <!-- Viral Reading Progress Bar -->
+    <div id="reading-progress" style="position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--primary); z-index: 10002; transition: width 0.1s ease; display: none;"></div>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="container">
+            <a href="/" class="nav-logo">MAAHIR<span>SHOP</span></a>
+            <div class="nav-links">
+                <a href="/" class="{{ 'active' if request.path == '/' }}">Home</a>
+                <a href="/shop" class="{{ 'active' if request.path == '/shop' }}">Shop</a>
+                <a href="/courses" class="{{ 'active' if request.path == '/courses' }}">Courses</a>
+                <a href="/news" class="{{ 'active' if request.path == '/news' }}">News</a>
+                <a href="/about" class="{{ 'active' if request.path == '/about' }}">About</a>
+                <a href="/contact" class="{{ 'active' if request.path == '/contact' }}">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-icon-btn" id="open-search" title="Search Everything">🔍</div>
+                <div class="nav-icon-btn" id="theme-toggle" title="Switch Theme">🌗</div>
+                <div class="nav-cart" id="open-cart">
+                    🛒 <span class="badge">0</span>
+                </div>
+                <a href="/account" class="btn btn-glass btn-sm hide-mobile">Account</a>
+                <div class="hamburger" id="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Full-Screen Smart Search Overlay -->
+    <div class="search-overlay glass" id="search-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 10005; display: none; align-items: center; justify-content: center; backdrop-filter: blur(40px);">
+        <div style="position: absolute; top: 40px; right: 40px; font-size: 2rem; cursor: pointer; color: var(--text-white);" id="close-search">✕</div>
+        <div class="container" style="max-width: 800px; text-align: center;">
+            <h2 style="margin-bottom: 30px; font-size: 2.5rem; color: var(--primary);">What are you <span>looking for?</span></h2>
+            <div style="position: relative;">
+                <input type="text" id="global-search-input" placeholder="Search products, courses, or insights..." style="width: 100%; padding: 25px 40px; background: rgba(255,255,255,0.05); border: 1px solid var(--primary); border-radius: 50px; color: var(--text-white); font-size: 1.5rem; outline: none; box-shadow: var(--shadow-glow);">
+                <div id="search-results-preview" style="margin-top: 30px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; text-align: left;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Floating AI Chat -->
+    <div class="ai-chat-bubble floating glass active" id="ai-chat-bubble" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10000; border: 1px solid var(--primary); box-shadow: var(--shadow-glow);">
+        <span style="font-size: 1.5rem;">🤖</span>
+    </div>
+    
+    <div class="ai-chat-window glass reveal" id="ai-chat-window" style="position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px; border-radius: var(--radius-md); display: none; flex-direction: column; overflow: hidden; z-index: 10000;">
+        <div style="background: var(--primary); color: var(--bg-dark); padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <h4 style="margin:0;">Maahir AI Assistant</h4>
+            <span id="close-chat" style="cursor:pointer; font-weight:800;">✕</span>
+        </div>
+        <div style="flex:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:15px;" id="chat-messages">
+            <div class="glass" style="padding:10px 15px; border-radius:10px; max-width:80%; align-self:flex-start; font-size:0.85rem;">
+                👋 Hello! I am Maahir AI. How can I help you globally today?
+            </div>
+        </div>
+        <div style="padding:15px; border-top:1px solid var(--glass-border); display:flex; gap:10px;">
+            <input type="text" placeholder="Ask AI..." style="flex:1; background:none; border:none; color:var(--text-white); outline:none; font-size:0.9rem;">
+            <button style="background:var(--primary); width:35px; height:35px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--bg-dark); font-weight:800;">→</button>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="nav-logo">MAAHIR<span>SHOP</span></a>
+                    <p>Dunida u keenaya alaabada ugu tayada sarreysa. Global Level Marketplace.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <span title="Secure SSL" style="font-size: 1.2rem; opacity: 0.6;">🛡️</span>
+                        <span title="PayPal Verified" style="font-size: 1.2rem; opacity: 0.6;">💳</span>
+                        <span title="Global Shipping" style="font-size: 1.2rem; opacity: 0.6;">🌍</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="/">Home</a>
+                    <a href="/shop">Marketplace</a>
+                    <a href="/courses">Academy</a>
+                    <a href="/news">Global Insights</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/contact">Support Center</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="tel:{{ info.phone }}">📞 {{ info.phone }}</a>
+                    <a href="https://wa.me/252616465014" target="_blank">💬 WhatsApp Support</a>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <a href="https://www.facebook.com/share/1DULHQn7GG/" target="_blank" class="btn btn-glass" style="width: 35px; height: 35px; padding: 0; font-size: 0.8rem;">fb</a>
+                        <a href="https://youtube.com/shorts/-0m1lHYzF9M?si=eph4isvdrv12LVQZ" target="_blank" class="btn btn-glass" style="width: 35px; height: 35px; padding: 0; font-size: 0.8rem;">🎬</a>
+                        <a href="https://x.com/maalikAli788557" target="_blank" class="btn btn-glass" style="width: 35px; height: 35px; padding: 0; font-size: 0.8rem;">𝕏</a>
+                        <a href="https://tiktok.com/@malik_579" target="_blank" class="btn btn-glass" style="width: 35px; height: 35px; padding: 0; font-size: 0.8rem;">📱</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Trust Badges Section -->
+            <div style="padding: 40px 0; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; text-align: center;">
+                <div>
+                    <h5 style="color: var(--primary); margin-bottom: 5px;">256-bit SSL</h5>
+                    <p style="font-size: 0.7rem; color: var(--text-dim);">Secure Transactions</p>
+                </div>
+                <div>
+                    <h5 style="color: var(--primary); margin-bottom: 5px;">24/7 Support</h5>
+                    <p style="font-size: 0.7rem; color: var(--text-dim);">Always Here for You</p>
+                </div>
+                <div>
+                    <h5 style="color: var(--primary); margin-bottom: 5px;">Global Reach</h5>
+                    <p style="font-size: 0.7rem; color: var(--text-dim);">Shipping to 150+ Countries</p>
+                </div>
+                <div>
+                    <h5 style="color: var(--primary); margin-bottom: 5px;">Elite Academy</h5>
+                    <p style="font-size: 0.7rem; color: var(--text-dim);">Certified Learning</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 Maahir Shop. Dhammaan xuquuqda way xifdisan yihiin.</span>
+                <span>Built with ❤️ by Maahir Team</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Side Drawer -->
+    <div class="cart-drawer glass" id="cart-drawer" style="position: fixed; top: 0; right: -400px; width: 400px; height: 100vh; z-index: 10001; transition: var(--transition); display: flex; flex-direction: column;">
+        <div style="padding: 30px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin:0;">Global <span>Cart</span></h3>
+            <span id="close-cart" style="cursor:pointer; font-size: 1.5rem;">✕</span>
+        </div>
+        <div style="flex:1; padding:30px; overflow-y:auto;" id="cart-items">
+            <p style="color: var(--text-dim); text-align: center; margin-top: 50px;">Your cart is empty.</p>
+        </div>
+        <div style="padding: 30px; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                <span>Total</span>
+                <span id="cart-total" style="color: var(--primary); font-weight: 800;">$0.00</span>
+            </div>
+            <a href="/checkout" class="btn btn-primary" style="width: 100%;">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Global Overlay -->
+    <div id="cart-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 10000; display: none;"></div>
+
+    <!-- Push Notification Prompt (New Global Growth Feature) -->
+    <div id="push-prompt" class="glass" style="position: fixed; bottom: 30px; left: 30px; width: 320px; padding: 25px; border-radius: 20px; z-index: 9999; display: none; animation: slideUp 0.5s ease;">
+        <div style="display: flex; gap: 15px; align-items: start;">
+            <div style="font-size: 2rem;">🔔</div>
+            <div>
+                <h4 style="margin: 0; font-size: 1rem;">Don't Miss the Future</h4>
+                <p style="margin: 5px 0 15px; font-size: 0.8rem; color: var(--text-dim); line-height: 1.4;">Get instant alerts on global price drops and new tech insights.</p>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-primary btn-sm" id="push-allow" style="padding: 6px 15px; font-size: 0.75rem;">Allow Alerts</button>
+                    <button class="btn btn-glass btn-sm" id="push-deny" style="padding: 6px 15px; font-size: 0.75rem;">Later</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

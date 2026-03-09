@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% block title %}Secure Checkout | Maahir Global{% endblock %}
+
+{% block content %}
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+
+<div class="page-header">
+    <div class="container">
+        <h1 class="reveal">Secure <span>Checkout</span></h1>
+        <p class="reveal">Complete your global transaction safely with encrypted protection.</p>
+    </div>
+</div>
+
+<section class="section" style="padding-top: 0;">
+    <div class="container">
+        <div class="checkout-layout" style="display: grid; grid-template-columns: 1fr 400px; gap: 40px; align-items: start;">
+            <!-- Checkout Form & Details -->
+            <div class="reveal">
+                <div class="glass" style="padding: 40px; border-radius: var(--radius-lg); margin-bottom: 30px;">
+                    <h3 style="margin-bottom: 30px;">{{ 'Billing' if course else 'Shipping & Billing' }} <span>Information</span></h3>
+                    <div style="display: grid; gap: 25px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <input type="text" placeholder="First Name" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);">
+                            <input type="text" placeholder="Last Name" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);">
+                        </div>
+                        <input type="email" placeholder="Email Address" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);">
+                        <input type="text" placeholder="Street Address" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                            <input type="text" placeholder="City" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);">
+                            <input type="text" placeholder="Country" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);">
+                            <input type="text" placeholder="Zip" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass" style="padding: 40px; border-radius: var(--radius-lg);">
+                    <h3 style="margin-bottom: 25px;">Payment <span>Method</span></h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px;">We support major global payment gateways including PayPal and secure credit cards.</p>
+                    <div id="paypal-button-container" style="min-height: 150px;"></div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <p style="font-size: 0.75rem; color: var(--text-dim);">🛡️ Encrypted by 256-bit SSL Security</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary Sidebar -->
+            <div class="reveal" style="animation-delay: 0.1s;">
+                <div class="glass" style="padding: 30px; border-radius: var(--radius-lg); position: sticky; top: 120px;">
+                    <h4 style="margin-bottom: 25px;">Order Summary</h4>
+                    
+                    <div id="checkout-items-container">
+                        <!-- Single course case (Jinja) -->
+                        {% if course %}
+                        <div style="display: flex; gap: 15px; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid var(--glass-border);">
+                            <div style="width: 60px; height: 60px; border-radius: 8px; overflow: hidden; background: #112240;">
+                                <img src="{{ course.img }}" alt="Item" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h5 style="margin: 0; color: var(--text-white);">{{ course.name }}</h5>
+                                <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: var(--text-dim);">Qty: 1</p>
+                                <p style="margin: 5px 0 0 0; color: var(--primary); font-weight: 700;">${{ course.price }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Subtotal</span>
+                            <span style="color: var(--text-white);" id="checkout-subtotal">${{ course.price if course else '0.00' }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">{{ 'Access' if course else 'Shipping' }}</span>
+                            <span style="color: var(--primary);">{{ 'INSTANT' if course else 'FREE' }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Tax (VAT)</span>
+                            <span style="color: var(--text-white);">$0.00</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--glass-border); font-size: 1.25rem; font-weight: 800;">
+                            <span style="color: var(--text-white);">Total</span>
+                            <span style="color: var(--primary);" id="checkout-total">${{ course.price if course else '0.00' }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="glass" style="margin-top: 30px; padding: 15px; border-radius: 8px; background: rgba(0, 255, 204, 0.05); border: 1px dashed var(--primary);">
+                        <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;" id="checkout-shipping-note">
+                            {% if course %}
+                            🚀 <strong>Instant Access:</strong> Gain full entry to the course academy immediately after successful payment.
+                            {% else %}
+                            This order is eligible for Global Express Shipping (2-4 Business Days).
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const isCourse = {{ 'true' if course else 'false' }};
+        let finalPrice = "{{ course.price if course else '0.00' }}";
+
+        if (!isCourse) {
+            const checkoutItems = JSON.parse(localStorage.getItem('maahir_cart') || '[]');
+            const container = document.getElementById('checkout-items-container');
+            const subtotalEl = document.getElementById('checkout-subtotal');
+            const totalEl = document.getElementById('checkout-total');
+            
+            if (checkoutItems.length > 0) {
+                container.innerHTML = '';
+                let total = 0;
+                checkoutItems.forEach(item => {
+                    total += item.price;
+                    container.innerHTML += `
+                        <div style="display: flex; gap: 15px; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid var(--glass-border);">
+                            <div style="width: 60px; height: 60px; border-radius: 8px; overflow: hidden; background: #112240;">
+                                <img src="${item.img}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h5 style="margin: 0; color: var(--text-white);">${item.name}</h5>
+                                <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: var(--text-dim);">Qty: 1</p>
+                                <p style="margin: 5px 0 0 0; color: var(--primary); font-weight: 700;">$${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+                finalPrice = total.toFixed(2);
+                subtotalEl.innerText = `$${finalPrice}`;
+                totalEl.innerText = `$${finalPrice}`;
+            }
+        }
+
+        if (window.paypal) {
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: { value: finalPrice }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        alert('Transaction completed by ' + details.payer.name.given_name);
+                        if (!isCourse) localStorage.removeItem('maahir_cart');
+                        window.location.href = "/account";
+                    });
+                }
+            }).render('#paypal-button-container');
+        }
+    });
+</script>
+{% endblock %}

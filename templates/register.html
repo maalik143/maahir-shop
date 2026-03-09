@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Join Global Platform | Maahir Shop{% endblock %}
+
+{% block content %}
+<section class="section" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 120px;">
+    <div class="container" style="max-width: 550px; width: 100%;">
+        <div class="glass reveal" style="padding: 50px; border-radius: var(--radius-lg); text-align: center; position: relative; overflow: hidden;">
+            <div style="position: absolute; bottom: -50px; right: -50px; width: 150px; height: 150px; background: var(--primary-glow); border-radius: 50%; filter: blur(50px);"></div>
+            
+            <h2 style="margin-bottom: 15px;">Create Global <span>Account</span></h2>
+            <p style="color: var(--text-muted); margin-bottom: 40px;">Join 25,000+ members in the Maahir Shop ecosystem.</p>
+            
+            <form action="/login" class="auth-form" style="display: flex; flex-direction: column; gap: 20px; text-align: left;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label style="font-size: 0.75rem; color: var(--text-dim); margin-bottom: 8px; display: block;">First Name</label>
+                        <input type="text" placeholder="Maahir" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 0.75rem; color: var(--text-dim); margin-bottom: 8px; display: block;">Last Name</label>
+                        <input type="text" placeholder="Dev" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 0.75rem; color: var(--text-dim); margin-bottom: 8px; display: block;">Email Address</label>
+                    <input type="email" placeholder="name@global.com" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);" required>
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 0.75rem; color: var(--text-dim); margin-bottom: 8px; display: block;">Password</label>
+                    <input type="password" placeholder="Create strong password" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);" required>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; gap: 10px; margin-top: 10px;">
+                    <input type="checkbox" style="margin-top: 5px;" required>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">I agree to the <a href="/terms" style="color: var(--primary);">Terms of Service</a> and <a href="/privacy" style="color: var(--primary);">Privacy Policy</a>.</p>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 20px;">Start your Journey</button>
+            </form>
+            
+            <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--glass-border);">
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Already have an account? <a href="/login" style="color: var(--primary); font-weight: 700;">Log In</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

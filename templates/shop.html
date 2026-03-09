@@ -1,7 +1,103 @@
-<!DOCTYPE html>
-<html>
-<head><title>shop.html</title></head>
-<body>
-<h1>Page Content</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Shop Maahir Global | Premium Electronics & Fashion{% endblock %}
+{% block meta_desc %}Browse over 50,000 global products. From MacBook Pro to the latest iPhone, find everything you need at Maahir Shop.{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1 class="reveal">Global <span>Marketplace</span></h1>
+        <p class="reveal">Explore premium quality products and world-class digital solutions.</p>
+    </div>
+</div>
+
+<section class="section" style="padding-top: 0;">
+    <div class="container">
+        <!-- Global Search & Filters -->
+        <div class="glass" style="padding: 24px 40px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: space-between; margin-bottom: 60px; gap: 30px;">
+            <div style="display: flex; align-items: center; gap: 20px; flex: 1;">
+                <span style="font-size: 1.4rem;">🔍</span>
+                <input type="text" id="shop-search" placeholder="Search 50,000+ global products..." style="background: none; border: none; color: var(--text-white); width: 100%; outline: none; font-size: 1.05rem;">
+            </div>
+            <div style="display: flex; gap: 40px; border-left: 1px solid var(--glass-border); padding-left: 40px; font-size: 0.9rem;">
+                <div><span style="color: var(--primary); font-weight: 800;">🌍 120+</span> Countries</div>
+                <div><span style="color: var(--primary); font-weight: 800;">⚡ 24h</span> Shipping</div>
+            </div>
+        </div>
+
+        <div class="shop-layout" style="display: grid; grid-template-columns: 280px 1fr; gap: 40px;">
+            <!-- Advanced Sidebar -->
+            <aside class="sidebar reveal">
+                <div class="filter-group glass" style="padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+                    <h4 style="margin-bottom: 20px; color: var(--text-white);">Supply Partners</h4>
+                    <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem;">
+                        <span style="color: var(--primary);">✔ Alibaba Official</span>
+                        <span style="color: var(--primary);">✔ Dsers Verified</span>
+                        <span style="color: var(--primary);">✔ Amazon Global</span>
+                    </div>
+                </div>
+                
+                <div class="filter-group glass" style="padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+                    <h4 style="margin-bottom: 20px; color: var(--text-white);">Categories</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;" id="shop-categories">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="all" checked> All items</label>
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Electronics"> Electronics</label>
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Fashion"> Fashion</label>
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Gaming"> Gaming Pro</label>
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Accessories"> Accessories</label>
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Home"> Smart Home</label>
+                    </div>
+                </div>
+
+                <div class="filter-group glass" style="padding: 24px; border-radius: 12px;">
+                    <h4 style="margin-bottom: 20px; color: var(--text-white);">Price Range</h4>
+                    <input type="range" style="width: 100%; accent-color: var(--primary);">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); margin-top: 10px;">
+                        <span>$0</span>
+                        <span>$10,000</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Shop Content -->
+            <div class="shop-main">
+                <div class="card-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;">
+                    {% set marketplace_items = [
+                        {'name': 'MacBook Pro M3 Max', 'price': '$2,499.00', 'img': 'https://images.unsplash.com/photo-1517336712462-237433878772?q=80&w=500', 'cat': 'Electronics', 'badge': 'HOT'},
+                        {'name': 'Global Edition Hoodie', 'price': '$65.00', 'img': 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500', 'cat': 'Fashion'},
+                        {'name': 'Pro 4K Ultra Drone', 'price': '$1,199.00', 'img': 'https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?q=80&w=500', 'cat': 'Electronics', 'badge': 'NEW'},
+                        {'name': 'Cyber Gaming setup', 'price': '$3,499.00', 'img': 'https://images.unsplash.com/photo-1624705002806-5d72df19c3ad?q=80&w=500', 'cat': 'Gaming'},
+                        {'name': 'Smart Watch Pro', 'price': '$299.00', 'img': 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500', 'cat': 'Accessories'},
+                        {'name': 'Minimal Desk Lamp', 'price': '$45.00', 'img': 'https://images.unsplash.com/photo-1534073828943-f801091bb18c?q=80&w=500', 'cat': 'Home'}
+                    ] %}
+                    {% for item in marketplace_items %}
+                    <div class="product-card card-glass reveal" data-cat="{{ item.cat }}">
+                        <div class="card-img" style="position: relative; height: 240px; overflow: hidden; border-radius: 12px 12px 0 0;">
+                            <img src="{{ item.img }}" alt="{{ item.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            {% if item.badge %}<span class="card-badge">{{ item.badge }}</span>{% endif %}
+                        </div>
+                        <div class="card-body" style="padding: 24px;">
+                            <p style="color: var(--primary); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">{{ item.cat }}</p>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-white);">{{ item.name }}</h3>
+                            <div class="rating" style="margin-bottom: 12px; color: #fbbf24;">★★★★★ <span style="color: var(--text-dim); font-size: 0.8rem;">(5.0)</span></div>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;">Premium quality sourced globally for the best value.</p>
+                        </div>
+                        <div class="card-footer" style="padding: 16px 24px; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 800; font-size: 1.25rem; color: var(--primary);">{{ item.price }}</span>
+                            <button onclick="addToCart('{{ item.name }}', '{{ item.price }}', '{{ item.img }}')" class="btn btn-primary btn-sm" style="padding: 8px 16px;">Add to Cart</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Global Pagination -->
+                <div class="pagination reveal" style="margin-top: 60px; display: flex; justify-content: center; gap: 15px;">
+                    <a href="#" class="btn btn-glass btn-sm active">1</a>
+                    <a href="#" class="btn btn-glass btn-sm">2</a>
+                    <a href="#" class="btn btn-glass btn-sm">3</a>
+                    <a href="#" class="btn btn-glass btn-sm">Next →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

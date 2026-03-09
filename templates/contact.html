@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}Contact Global Support | Maahir Shop{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1 class="reveal">Get In <span>Touch</span></h1>
+        <p class="reveal">Our global support team is available 24/7 to assist you.</p>
+    </div>
+</div>
+
+<section class="section" style="padding-top: 0;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px;">
+            <!-- Contact Card Info -->
+            <div class="reveal">
+                <div class="glass" style="padding: 40px; border-radius: var(--radius-lg); margin-bottom: 30px;">
+                    <h3 style="margin-bottom: 30px;">Connect With <span>Us</span></h3>
+                    <div style="display: flex; flex-direction: column; gap: 30px;">
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary-glow); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📧</div>
+                            <div>
+                                <p style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Official Email</p>
+                                <h5 style="color: var(--text-white);">{{ info.email }}</h5>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--secondary-glow); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📞</div>
+                            <div>
+                                <p style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Direct Phone</p>
+                                <h5 style="color: var(--text-white);">{{ info.phone }}</h5>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 0, 122, 0.1); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📍</div>
+                            <div>
+                                <p style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Global HQ</p>
+                                <h5 style="color: var(--text-white);">Mogadishu, Somalia • Global Reach</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass" style="padding: 30px; border-radius: var(--radius-lg); text-align: center;">
+                    <h4 style="margin-bottom: 20px;">Follow the Pulse</h4>
+                    <div style="display: flex; justify-content: center; gap: 15px;">
+                        <a href="https://www.facebook.com/share/1DULHQn7GG/" target="_blank" class="btn btn-glass" style="width: 45px; height: 45px; padding: 0; font-size: 1.2rem;">fb</a>
+                        <a href="https://wa.me/252616465014" target="_blank" class="btn btn-glass" style="width: 45px; height: 45px; padding: 0; font-size: 1.2rem;">💬</a>
+                        <a href="https://youtube.com/shorts/-0m1lHYzF9M?si=eph4isvdrv12LVQZ" target="_blank" class="btn btn-glass" style="width: 45px; height: 45px; padding: 0; font-size: 1.2rem;">🎬</a>
+                        <a href="https://x.com/maalikAli788557" target="_blank" class="btn btn-glass" style="width: 45px; height: 45px; padding: 0; font-size: 1.2rem;">𝕏</a>
+                        <a href="https://tiktok.com/@malik_579" target="_blank" class="btn btn-glass" style="width: 45px; height: 45px; padding: 0; font-size: 1.2rem;">📱</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="reveal" style="animation-delay: 0.1s;">
+                <div class="glass" style="padding: 50px; border-radius: var(--radius-lg); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--primary-glow); border-radius: 50%; filter: blur(50px);"></div>
+                    <h3 style="margin-bottom: 35px;">Send Us a <span>Message</span></h3>
+                    <form class="contact-form" style="display: flex; flex-direction: column; gap: 25px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label style="display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px;">Full Name</label>
+                                <input type="text" placeholder="John Doe" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);">
+                            </div>
+                            <div class="form-group">
+                                <label style="display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px;">Email Address</label>
+                                <input type="email" placeholder="john@example.com" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px;">Subject</label>
+                            <select style="width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white);">
+                                <option>General Inquiry</option>
+                                <option>Order Support</option>
+                                <option>Course Enrollment</option>
+                                <option>Partnership</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label style="display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px;">Your Message</label>
+                            <textarea placeholder="Tell us how we can help..." style="width: 100%; height: 150px; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: var(--text-white); resize: none;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">🚀 Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

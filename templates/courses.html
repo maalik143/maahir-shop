@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Global Academy | Expert-Led Courses | Maahir Shop{% endblock %}
+{% block meta_desc %}Join 5,000+ students at Maahir Academy. Master Programming, Design, Business, and Marketing with our global expert-led courses.{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1 class="reveal">Maahir <span>Academy</span></h1>
+        <p class="reveal">Master global-level skills from world-class instructors. Your future starts here.</p>
+    </div>
+</div>
+
+<section class="section" style="padding-top: 0;">
+    <div class="container">
+        <!-- Search & Filter Area -->
+        <div class="glass" style="padding: 24px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: space-between; margin-bottom: 60px; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 15px; flex: 1; padding-left: 20px;">
+                <span style="font-size: 1.2rem;">📚</span>
+                <input type="text" id="course-search" placeholder="Search courses (Marketing, AI, Coding...)" style="background: none; border: none; color: var(--text-white); width: 100%; outline: none; font-size: 1.05rem;">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-glass btn-sm">All Levels</button>
+                <button class="btn btn-glass btn-sm">Premium Only</button>
+                <button class="btn btn-primary btn-sm">Search</button>
+            </div>
+        </div>
+
+        <div class="courses-layout" style="display: grid; grid-template-columns: 1fr 3fr; gap: 50px;">
+            <!-- Category Sidebar -->
+            <aside class="reveal">
+                <div class="glass" style="padding: 30px; border-radius: var(--radius-lg);">
+                    <h4 style="margin-bottom: 25px;">Categories</h4>
+                    <div style="display: flex; flex-direction: column; gap: 15px;" id="course-categories">
+                        <button class="filter-btn active" data-filter="all" style="background:none; border:none; color: var(--primary); font-weight: 700; text-align:left; cursor:pointer;">All Courses</button>
+                        <button class="filter-btn" data-filter="programming" style="background:none; border:none; color: var(--text-muted); text-align:left; cursor:pointer;">Development</button>
+                        <button class="filter-btn" data-filter="business" style="background:none; border:none; color: var(--text-muted); text-align:left; cursor:pointer;">Business</button>
+                        <button class="filter-btn" data-filter="design" style="background:none; border:none; color: var(--text-muted); text-align:left; cursor:pointer;">Design</button>
+                        <button class="filter-btn" data-filter="marketing" style="background:none; border:none; color: var(--text-muted); text-align:left; cursor:pointer;">Marketing</button>
+                        <button class="filter-btn" data-filter="ai" style="background:none; border:none; color: var(--text-muted); text-align:left; cursor:pointer;">Artificial Intelligence</button>
+                    </div>
+                    <div style="margin-top: 40px; border-top: 1px solid var(--glass-border); padding-top: 30px;">
+                        <h4 style="margin-bottom: 20px;">Skill Level</h4>
+                        <div style="display: flex; flex-direction: column; gap: 10px;" id="level-filters">
+                            <label style="cursor:pointer;"><input type="checkbox" value="beginner"> Beginner</label>
+                            <label style="cursor:pointer;"><input type="checkbox" value="intermediate"> Intermediate</label>
+                            <label style="cursor:pointer;"><input type="checkbox" value="advanced"> Advanced Expert</label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Course Grid -->
+            <div class="courses-main">
+                <div class="card-grid" id="courses-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;">
+                    {% for cid, details in courses.items() %}
+                    {# Mock levels for demonstration #}
+                    {% set levels = ['beginner', 'intermediate', 'advanced'] %}
+                    {% set level = levels[loop.index0 % 3] %}
+                    <div class="course-card card-glass reveal" data-category="{{ cid }}" data-level="{{ level }}">
+                        <div class="card-img" style="height: 200px; position: relative;">
+                            <img src="{{ details.img }}" alt="{{ details.name }}" style="width:100%; height:100%; object-fit:cover;">
+                            <div style="position: absolute; bottom: 15px; left: 15px; background: rgba(0,0,0,0.8); padding: 5px 12px; border-radius: 5px; font-size: 0.75rem; color: var(--primary);">
+                                ⏱ 12h 45m
+                            </div>
+                        </div>
+                        <div class="card-body" style="padding: 24px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <span style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim); letter-spacing: 1px;">Academy Certified</span>
+                                <div style="color: #fbbf24; font-size: 0.8rem;">★★★★★</div>
+                            </div>
+                            <h3 style="font-size: 1.2rem; margin-bottom: 15px;">{{ details.name }}</h3>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                                <img src="https://i.pravatar.cc/100?u={{ cid }}" alt="Instructor" style="width: 25px; height: 25px; border-radius: 50%;">
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">By Prof. Maahir</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--glass-border); padding-top: 20px;">
+                                <span style="font-size: 1.4rem; font-weight: 800; color: var(--primary);">${{ details.price }}</span>
+                                <a href="/enroll/{{ cid }}" class="btn btn-primary btn-sm">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

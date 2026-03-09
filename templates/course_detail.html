@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title %}{{ course.name }} | Maahir Academy{% endblock %}
+{% block meta_desc %}Enroll in {{ course.name }} for only ${{ course.price }}. Master the skills you need for a global career with expert guidance from Maahir Shop.{% endblock %}
+{% block og_image %}{{ course.img }}{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="course-detail-layout" style="display: grid; grid-template-columns: 1.8fr 1fr; gap: 60px;">
+            <!-- Main Content -->
+            <div class="reveal">
+                <div class="glass" style="padding: 10px; border-radius: var(--radius-lg); margin-bottom: 40px; border: 1px solid var(--primary-glow);">
+                    <div style="height: 450px; background: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200') center/cover; border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+                        <div class="glass floating" style="width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--primary);">
+                            <span style="font-size: 2rem; margin-left: 5px; color: var(--primary);">▶</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 40px;">
+                    <span style="color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">DEVELOPMENT</span>
+                    <h1 style="font-size: 3rem; margin: 15px 0; line-height: 1.1;">Complete <span>Python Masterclass</span> 2026</h1>
+                    <div style="display: flex; gap: 30px; align-items: center; color: var(--text-muted); font-size: 0.9rem;">
+                        <span style="color: #fbbf24;">★★★★★ <span style="color: var(--text-dim);">(5,200+ students)</span></span>
+                        <span>⏱ 42 Total Hours</span>
+                        <span>📚 180 Lessons</span>
+                    </div>
+                </div>
+
+                <div class="glass" style="padding: 40px; border-radius: var(--radius-lg); margin-bottom: 40px;">
+                    <h3 style="margin-bottom: 25px;">What you will <span>Learn</span></h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="display: flex; gap: 15px;">
+                            <span style="color: var(--primary);">✔</span>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Master Python from basic to advanced OOP.</p>
+                        </div>
+                        <div style="display: flex; gap: 15px;">
+                            <span style="color: var(--primary);">✔</span>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Build complex web apps with Flask & Django.</p>
+                        </div>
+                        <div style="display: flex; gap: 15px;">
+                            <span style="color: var(--primary);">✔</span>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Data analysis with Pandas & Matplotlib.</p>
+                        </div>
+                        <div style="display: flex; gap: 15px;">
+                            <span style="color: var(--primary);">✔</span>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Understand AI & Machine Learning basics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass" style="padding: 40px; border-radius: var(--radius-lg);">
+                    <h3 style="margin-bottom: 25px;">Curriculum <span>Structure</span></h3>
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        {% set modules = [
+                            {'name': 'Introduction to Silicon Valley Standards', 'time': '2h 15m'},
+                            {'name': 'Python Deep Dive - Core Logic', 'time': '5h 45m'},
+                            {'name': 'Object Oriented Paradigm (OOP)', 'time': '4h 10m'},
+                            {'name': 'Advanced Data Structures', 'time': '6h 30m'},
+                            {'name': 'Web Ecosystems (Flask/Django)', 'time': '12h 00m'},
+                            {'name': 'Final Capstone Project', 'time': '10h 00m'}
+                        ] %}
+                        {% for m in modules %}
+                        <div class="glass-hover" style="padding: 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--glass-border);">
+                            <div style="display: flex; gap: 20px; align-items: center;">
+                                <span style="width: 30px; height: 30px; border-radius: 50%; background: var(--bg-dark); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: 1px solid var(--primary-glow);">{{ loop.index }}</span>
+                                <h5 style="margin: 0; color: var(--text-white);">{{ m.name }}</h5>
+                            </div>
+                            <span style="font-size: 0.8rem; color: var(--text-dim);">{{ m.time }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="reveal" style="animation-delay: 0.2s;">
+                <div class="glass" style="padding: 40px; border-radius: var(--radius-lg); position: sticky; top: 120px; text-align: center;">
+                    <h2 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 10px;">$49.99</h2>
+                    <p style="color: var(--text-dim); text-decoration: line-through; margin-bottom: 30px;">$199.99 (75% OFF)</p>
+                    
+                    <a href="/checkout" class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: 20px;">Enroll in Course</a>
+                    
+                    <ul style="text-align: left; list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px; margin-top: 30px; font-size: 0.9rem; color: var(--text-muted);">
+                        <li><span style="color: var(--primary);">🎁</span> Full lifetime access</li>
+                        <li><span style="color: var(--primary);">📱</span> Access on mobile and TV</li>
+                        <li><span style="color: var(--primary);">📜</span> Certificate of completion</li>
+                        <li><span style="color: var(--primary);">💬</span> Dedicated support community</li>
+                    </ul>
+                    
+                    <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--glass-border);">
+                        <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 15px;">Instructor</p>
+                        <div style="display: flex; align-items: center; gap: 15px; text-align: left;">
+                            <img src="https://i.pravatar.cc/100?u=maahir" alt="Instructor" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--primary);">
+                            <div>
+                                <h5 style="margin: 0; color: var(--text-white);">Dr. Ahmed Maahir</h5>
+                                <p style="margin: 0; font-size: 0.7rem; color: var(--text-dim);">PhD Computer Science</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
