@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+
+
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
@@ -76,111 +78,88 @@ NEWS_DATA = {
 
 @app.route('/')
 def home():
-    return render_template('index.html', info=MY_INFO)
+    return jsonify({"message": "Welcome to Maahir Shop", "info": MY_INFO})
 
 @app.route('/shop')
 def shop():
-    return render_template('shop.html', info=MY_INFO)
+    return jsonify({"message": "Shop Page", "info": MY_INFO})
 
 @app.route('/product/<int:product_id>')
 def product(product_id):
-    return render_template('product.html', product_id=product_id, info=MY_INFO)
+    return jsonify({"product_id": product_id, "info": MY_INFO})
 
 @app.route('/courses')
 def courses():
-    return render_template('courses.html', courses=COURSES_DATA, info=MY_INFO)
+    return jsonify({"courses": COURSES_DATA, "info": MY_INFO})
 
 @app.route('/course/<course_id>')
 def course_detail(course_id):
     course = COURSES_DATA.get(course_id)
     if course:
-        return render_template('course_detail.html', course=course, course_id=course_id, info=MY_INFO)
-    return "Course not found", 404
+        return jsonify({"course": course, "course_id": course_id, "info": MY_INFO})
+    return jsonify({"error": "Course not found"}), 404
 
 @app.route('/enroll/<course_id>')
 def enroll(course_id):
     course = COURSES_DATA.get(course_id)
     if course:
-        # Qofka wuxuu toos u tagayaa PayPal Checkout
-        return render_template('checkout.html', course=course, info=MY_INFO)
-    return "Course not found", 404
+        return jsonify({"message": "Checkout", "course": course, "info": MY_INFO})
+    return jsonify({"error": "Course not found"}), 404
 
 @app.route('/news')
 def news():
-    return render_template('news.html', all_news=NEWS_DATA, info=MY_INFO)
+    return jsonify({"news": NEWS_DATA, "info": MY_INFO})
 
 @app.route('/news/<news_id>')
 def news_detail(news_id):
     article = NEWS_DATA.get(news_id)
     if article:
-        # Content Discovery Logic (ID included for dynamic routing)
-        trending = [{"id": k, **NEWS_DATA[k]} for k in NEWS_DATA if k != news_id][:3]
-        related = [{"id": k, **NEWS_DATA[k]} for k in NEWS_DATA if k != news_id][:2]
-        return render_template('news_detail.html', article=article, trending=trending, related=related, info=MY_INFO)
-    return "Article not found", 404
+        trending = [{**NEWS_DATA[k], "id": k} for k in NEWS_DATA if k != news_id][:3]
+        related = [{**NEWS_DATA[k], "id": k} for k in NEWS_DATA if k != news_id][:2]
+        return jsonify({"article": article, "trending": trending, "related": related, "info": MY_INFO})
+    return jsonify({"error": "Article not found"}), 404
 
 @app.route('/about')
 def about():
-    return render_template('about.html', info=MY_INFO)
+    return jsonify({"message": "About Page", "info": MY_INFO})
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html', info=MY_INFO)
+    return jsonify({"message": "Contact Page", "info": MY_INFO})
 
 @app.route('/login')
 def login():
-    return render_template('login.html', info=MY_INFO)
+    return jsonify({"message": "Login Page", "info": MY_INFO})
 
 @app.route('/register')
 def register():
-    return render_template('register.html', info=MY_INFO)
+    return jsonify({"message": "Register Page", "info": MY_INFO})
 
 @app.route('/account')
 def account():
-
-    return render_template('account.html', info=MY_INFO)
+    return jsonify({"message": "Account Page", "info": MY_INFO})
 
 @app.route('/admin')
 def admin():
-    # Dashboard stats for the global platform
     stats = {
         "revenue": "$124,500",
         "orders": "842",
         "students": "5,210",
         "growth": "+15%"
     }
-    return render_template('admin.html', info=MY_INFO, stats=stats)
+    return jsonify({"message": "Admin Dashboard", "info": MY_INFO, "stats": stats})
 
 @app.route('/checkout')
 def checkout():
-    # Bogga lacag bixinta PayPal (General)
-    return render_template('checkout.html', info=MY_INFO)
+    return jsonify({"message": "Checkout Page", "info": MY_INFO})
 
 @app.route('/privacy')
 def privacy():
-    return render_template('privacy.html', info=MY_INFO)
+    return jsonify({"message": "Privacy Policy", "info": MY_INFO})
 
 @app.route('/terms')
 def terms():
-    return render_template('terms.html', info=MY_INFO)
-
-@app.route('/sitemap.xml')
-def sitemap():
-    import datetime
-    pages = []
-    # Dynamic routes
-    for nid in NEWS_DATA:
-        pages.append(["http://127.0.0.1:5000/news/" + nid, datetime.datetime.now().strftime('%Y-%m-%d')])
-    for cid in COURSES_DATA:
-        pages.append(["http://127.0.0.1:5000/course/" + cid, datetime.datetime.now().strftime('%Y-%m-%d')])
-    # Static routes
-    for rule in app.url_map.iter_rules():
-        if "GET" in rule.methods and len(rule.arguments) == 0:
-            pages.append(["http://127.0.0.1:5000" + str(rule.rule), datetime.datetime.now().strftime('%Y-%m-%d')])
-    
-    sitemap_xml = render_template('sitemap_template.xml', pages=pages)
-    return sitemap_xml, {'Content-Type': 'application/xml'}
+    return jsonify({"message": "Terms of Service", "info": MY_INFO})
 
 if __name__ == "__main__":
     app.run(debug=True)
-
